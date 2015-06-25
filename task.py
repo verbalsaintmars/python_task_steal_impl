@@ -78,7 +78,8 @@ if __name__ == '__main__':
 
     _, args = parser.parse_args()
 
-    Flag = True if args[0] == 1 else False
+    Flag = True if args[0] == '1' else False
+    print(Flag)
 
     def compute(start):
         def fab(num=start):
@@ -90,11 +91,11 @@ if __name__ == '__main__':
                 return num*fab(num-1)
         return fab
 
-    pool = Pool(4, Flag)
+    pool = Pool(8, Flag)
 
     begin_time = time.time()
 
-    for i in xrange(50000):
+    for i in xrange(500000):
         pool.add_work(compute((i+1) % 400))
 
     pool.wait_completion()
